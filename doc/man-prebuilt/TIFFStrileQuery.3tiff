@@ -27,7 +27,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "TIFFSTRILEQUERY" "3tiff" "Jun 10, 2023" "4.5" "LibTIFF"
+.TH "TIFFSTRILEQUERY" "3tiff" "Sep 08, 2023" "4.6" "LibTIFF"
 .SH NAME
 TIFFStrileQuery \- get strile byte count and offset
 .SH SYNOPSIS

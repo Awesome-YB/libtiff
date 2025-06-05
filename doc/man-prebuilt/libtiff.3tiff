@@ -27,7 +27,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "LIBTIFF" "3tiff" "Jun 10, 2023" "4.5" "LibTIFF"
+.TH "LIBTIFF" "3tiff" "Sep 08, 2023" "4.6" "LibTIFF"
 .SH NAME
 libtiff \- introduction to libtiff, a library for reading and writing TIFF files
 .SH SYNOPSIS
@@ -1782,19 +1782,9 @@ Warning messages are likewise directed through the
 \fI\%TIFFWarningExtR()\fP routine.
 .SH SEE ALSO
 .sp
-\fI\%fax2tiff\fP,
-\fI\%pal2rgb\fP,
-\fI\%ppm2tiff\fP,
-\fI\%rgb2ycbcr\fP,
-\fI\%raw2tiff\fP,
-\fI\%tiff2bw\fP,
-\fI\%tiffdither\fP,
 \fI\%tiffdump\fP,
 \fI\%tiffcp\fP,
-\fI\%tiff2cmp\fP,
-\fI\%tiffgt\fP,
 \fI\%tiffinfo\fP,
-\fI\%tiffmedian\fP,
 \fI\%tiffsplit\fP,
 .sp
 \fB“Tag Image File Format Specification *Revision 6.0*”\fP,

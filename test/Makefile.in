@@ -145,7 +145,9 @@ CONFIG_HEADER = $(top_builddir)/config/config.h \
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 @HAVE_JPEG_TRUE@@TIFF_TOOLS_TRUE@am__EXEEXT_1 = raw_decode$(EXEEXT)
-@BUILD_STATIC_TRUE@am__EXEEXT_2 = rational_precision2double$(EXEEXT)
+@BUILD_STATIC_TRUE@am__EXEEXT_2 = rational_precision2double$(EXEEXT) \
+@BUILD_STATIC_TRUE@	test_write_read_tags$(EXEEXT) \
+@BUILD_STATIC_TRUE@	test_transferfunction_write_read$(EXEEXT)
 am_ascii_tag_OBJECTS = ascii_tag.$(OBJEXT)
 ascii_tag_OBJECTS = $(am_ascii_tag_OBJECTS)
 ascii_tag_DEPENDENCIES = $(LIBTIFF)
@@ -214,6 +216,27 @@ test_open_options_DEPENDENCIES = $(LIBTIFF)
 am_test_signed_tags_OBJECTS = test_signed_tags.$(OBJEXT)
 test_signed_tags_OBJECTS = $(am_test_signed_tags_OBJECTS)
 test_signed_tags_DEPENDENCIES = $(LIBTIFF)
+am__test_transferfunction_write_read_SOURCES_DIST =  \
+	test_transferfunction_write_read.c
+@BUILD_STATIC_TRUE@am_test_transferfunction_write_read_OBJECTS =  \
+@BUILD_STATIC_TRUE@	test_transferfunction_write_read.$(OBJEXT)
+test_transferfunction_write_read_OBJECTS =  \
+	$(am_test_transferfunction_write_read_OBJECTS)
+@BUILD_STATIC_TRUE@test_transferfunction_write_read_DEPENDENCIES =  \
+@BUILD_STATIC_TRUE@	$(LIBTIFF)
+test_transferfunction_write_read_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
+	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
+	$(AM_CFLAGS) $(CFLAGS) \
+	$(test_transferfunction_write_read_LDFLAGS) $(LDFLAGS) -o $@
+am__test_write_read_tags_SOURCES_DIST = test_write_read_tags.c
+@BUILD_STATIC_TRUE@am_test_write_read_tags_OBJECTS =  \
+@BUILD_STATIC_TRUE@	test_write_read_tags.$(OBJEXT)
+test_write_read_tags_OBJECTS = $(am_test_write_read_tags_OBJECTS)
+@BUILD_STATIC_TRUE@test_write_read_tags_DEPENDENCIES = $(LIBTIFF)
+test_write_read_tags_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
+	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
+	$(AM_CFLAGS) $(CFLAGS) $(test_write_read_tags_LDFLAGS) \
+	$(LDFLAGS) -o $@
 testtypes_SOURCES = testtypes.c
 testtypes_OBJECTS = testtypes.$(OBJEXT)
 testtypes_LDADD = $(LDADD)
@@ -244,7 +267,9 @@ am__depfiles_remade = ./$(DEPDIR)/ascii_tag.Po \
 	./$(DEPDIR)/test_arrays.Po ./$(DEPDIR)/test_directory.Po \
 	./$(DEPDIR)/test_ifd_loop_detection-test_ifd_loop_detection.Po \
 	./$(DEPDIR)/test_open_options.Po \
-	./$(DEPDIR)/test_signed_tags.Po ./$(DEPDIR)/testtypes.Po
+	./$(DEPDIR)/test_signed_tags.Po \
+	./$(DEPDIR)/test_transferfunction_write_read.Po \
+	./$(DEPDIR)/test_write_read_tags.Po ./$(DEPDIR)/testtypes.Po
 am__mv = mv -f
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
@@ -272,7 +297,8 @@ SOURCES = $(ascii_tag_SOURCES) $(custom_dir_SOURCES) \
 	$(test_append_to_strip_SOURCES) $(test_directory_SOURCES) \
 	$(test_ifd_loop_detection_SOURCES) \
 	$(test_open_options_SOURCES) $(test_signed_tags_SOURCES) \
-	testtypes.c
+	$(test_transferfunction_write_read_SOURCES) \
+	$(test_write_read_tags_SOURCES) testtypes.c
 DIST_SOURCES = $(ascii_tag_SOURCES) $(custom_dir_SOURCES) \
 	$(custom_dir_EXIF_231_SOURCES) $(defer_strile_loading_SOURCES) \
 	$(defer_strile_writing_SOURCES) $(long_tag_SOURCES) \
@@ -281,7 +307,8 @@ DIST_SOURCES = $(ascii_tag_SOURCES) $(custom_dir_SOURCES) \
 	$(strip_rw_SOURCES) $(test_append_to_strip_SOURCES) \
 	$(test_directory_SOURCES) $(test_ifd_loop_detection_SOURCES) \
 	$(test_open_options_SOURCES) $(test_signed_tags_SOURCES) \
-	testtypes.c
+	$(am__test_transferfunction_write_read_SOURCES_DIST) \
+	$(am__test_write_read_tags_SOURCES_DIST) testtypes.c
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -491,78 +518,14 @@ am__set_TESTS_bases = \
   bases=`echo $$bases`
 RECHECK_LOGS = $(TEST_LOGS)
 AM_RECURSIVE_TARGETS = check recheck
-@HAVE_JPEG_TRUE@@TIFF_TOOLS_TRUE@am__EXEEXT_3 =  \
-@HAVE_JPEG_TRUE@@TIFF_TOOLS_TRUE@	tiff2rgba-quad-tile.jpg.sh \
-@HAVE_JPEG_TRUE@@TIFF_TOOLS_TRUE@	tiff2rgba-ojpeg_zackthecat_subsamp22_single_strip.sh \
-@HAVE_JPEG_TRUE@@TIFF_TOOLS_TRUE@	tiff2rgba-ojpeg_chewey_subsamp21_multi_strip.sh \
-@HAVE_JPEG_TRUE@@TIFF_TOOLS_TRUE@	tiff2rgba-ojpeg_single_strip_no_rowsperstrip.sh
-@TIFF_TOOLS_TRUE@am__EXEEXT_4 = ppm2tiff_pbm.sh ppm2tiff_pgm.sh \
-@TIFF_TOOLS_TRUE@	ppm2tiff_ppm.sh fax2tiff.sh tiffcp-g3.sh \
-@TIFF_TOOLS_TRUE@	tiffcp-g3-1d.sh tiffcp-g3-1d-fill.sh \
-@TIFF_TOOLS_TRUE@	tiffcp-g3-2d.sh tiffcp-g3-2d-fill.sh \
-@TIFF_TOOLS_TRUE@	tiffcp-g4.sh tiffcp-logluv.sh \
-@TIFF_TOOLS_TRUE@	tiffcp-thumbnail.sh tiffcp-lzw-compat.sh \
+am__EXEEXT_3 =
+@TIFF_TOOLS_TRUE@am__EXEEXT_4 = tiffcp-g3.sh tiffcp-g3-1d.sh \
+@TIFF_TOOLS_TRUE@	tiffcp-g3-1d-fill.sh tiffcp-g3-2d.sh \
+@TIFF_TOOLS_TRUE@	tiffcp-g3-2d-fill.sh tiffcp-g4.sh \
+@TIFF_TOOLS_TRUE@	tiffcp-logluv.sh tiffcp-lzw-compat.sh \
 @TIFF_TOOLS_TRUE@	tiffcp-lzw-scanline-decode.sh tiffdump.sh \
 @TIFF_TOOLS_TRUE@	tiffinfo.sh tiffcp-split.sh \
-@TIFF_TOOLS_TRUE@	tiffcp-split-join.sh tiff2ps-PS1.sh \
-@TIFF_TOOLS_TRUE@	tiff2ps-PS2.sh tiff2ps-PS3.sh tiff2ps-EPS1.sh \
-@TIFF_TOOLS_TRUE@	tiff2pdf.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-doubleflip-logluv-3c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-doubleflip-minisblack-1c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-doubleflip-minisblack-1c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-doubleflip-minisblack-2c-8b-alpha.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-doubleflip-miniswhite-1c-1b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-doubleflip-palette-1c-1b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-doubleflip-palette-1c-4b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-doubleflip-palette-1c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-doubleflip-rgb-3c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-doubleflip-rgb-3c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extract-logluv-3c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extract-minisblack-1c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extract-minisblack-1c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extract-minisblack-2c-8b-alpha.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extract-miniswhite-1c-1b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extract-palette-1c-1b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extract-palette-1c-4b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extract-palette-1c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extract-rgb-3c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extract-rgb-3c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extractz14-logluv-3c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extractz14-minisblack-1c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extractz14-minisblack-1c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extractz14-minisblack-2c-8b-alpha.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extractz14-miniswhite-1c-1b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extractz14-palette-1c-1b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extractz14-palette-1c-4b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extractz14-palette-1c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extractz14-rgb-3c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extractz14-rgb-3c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-R90-logluv-3c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-R90-minisblack-1c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-R90-minisblack-1c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-R90-minisblack-2c-8b-alpha.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-R90-miniswhite-1c-1b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-R90-palette-1c-1b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-R90-palette-1c-4b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-R90-palette-1c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-R90-rgb-3c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-R90-rgb-3c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiff2bw-palette-1c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiff2bw-quad-lzw-compat.sh \
-@TIFF_TOOLS_TRUE@	tiff2bw-rgb-3c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiff2rgba-logluv-3c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiff2rgba-minisblack-1c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiff2rgba-minisblack-1c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiff2rgba-minisblack-2c-8b-alpha.sh \
-@TIFF_TOOLS_TRUE@	tiff2rgba-miniswhite-1c-1b.sh \
-@TIFF_TOOLS_TRUE@	tiff2rgba-palette-1c-1b.sh \
-@TIFF_TOOLS_TRUE@	tiff2rgba-palette-1c-4b.sh \
-@TIFF_TOOLS_TRUE@	tiff2rgba-palette-1c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiff2rgba-rgb-3c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiff2rgba-rgb-3c-8b.sh testfax4.sh \
-@TIFF_TOOLS_TRUE@	testfax3_bug_513.sh \
-@TIFF_TOOLS_TRUE@	testdeflatelaststripextradata.sh \
-@TIFF_TOOLS_TRUE@	$(am__EXEEXT_3)
+@TIFF_TOOLS_TRUE@	tiffcp-split-join.sh $(am__EXEEXT_3)
 TEST_SUITE_LOG = test-suite.log
 TEST_EXTENSIONS = @EXEEXT@ .test
 LOG_DRIVER = $(SHELL) $(top_srcdir)/config/test-driver
@@ -617,12 +580,6 @@ ECHO_T = @ECHO_T@
 EGREP = @EGREP@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
-GLUT_CFLAGS = @GLUT_CFLAGS@
-GLUT_LIBS = @GLUT_LIBS@
-GLU_CFLAGS = @GLU_CFLAGS@
-GLU_LIBS = @GLU_LIBS@
-GL_CFLAGS = @GL_CFLAGS@
-GL_LIBS = @GL_LIBS@
 GREP = @GREP@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
@@ -665,9 +622,6 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
-PTHREAD_CC = @PTHREAD_CC@
-PTHREAD_CFLAGS = @PTHREAD_CFLAGS@
-PTHREAD_LIBS = @PTHREAD_LIBS@
 PYTHON_BIN = @PYTHON_BIN@
 RANLIB = @RANLIB@
 SED = @SED@
@@ -680,11 +634,6 @@ TIFF_MAN1_PREBUILT = @TIFF_MAN1_PREBUILT@
 TIFF_MAN3_GEN = @TIFF_MAN3_GEN@
 TIFF_MAN3_PREBUILT = @TIFF_MAN3_PREBUILT@
 VERSION = @VERSION@
-XMKMF = @XMKMF@
-X_CFLAGS = @X_CFLAGS@
-X_EXTRA_LIBS = @X_EXTRA_LIBS@
-X_LIBS = @X_LIBS@
-X_PRE_LIBS = @X_PRE_LIBS@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
@@ -698,7 +647,6 @@ am__leading_dot = @am__leading_dot@
 am__quote = @am__quote@
 am__tar = @am__tar@
 am__untar = @am__untar@
-ax_pthread_config = @ax_pthread_config@
 bindir = @bindir@
 build = @build@
 build_alias = @build_alias@
@@ -767,21 +715,13 @@ CLEANFILES = test_packbits.tif o-*
 @HAVE_JPEG_FALSE@JPEG_DEPENDENT_CHECK_PROG = 
 @HAVE_JPEG_TRUE@@TIFF_TOOLS_TRUE@JPEG_DEPENDENT_CHECK_PROG = raw_decode
 @HAVE_JPEG_FALSE@JPEG_DEPENDENT_TESTSCRIPTS = 
-@HAVE_JPEG_TRUE@@TIFF_TOOLS_TRUE@JPEG_DEPENDENT_TESTSCRIPTS = \
-@HAVE_JPEG_TRUE@@TIFF_TOOLS_TRUE@	tiff2rgba-quad-tile.jpg.sh \
-@HAVE_JPEG_TRUE@@TIFF_TOOLS_TRUE@	tiff2rgba-ojpeg_zackthecat_subsamp22_single_strip.sh \
-@HAVE_JPEG_TRUE@@TIFF_TOOLS_TRUE@	tiff2rgba-ojpeg_chewey_subsamp21_multi_strip.sh \
-@HAVE_JPEG_TRUE@@TIFF_TOOLS_TRUE@	tiff2rgba-ojpeg_single_strip_no_rowsperstrip.sh
-
-@BUILD_STATIC_TRUE@STATIC_CHECK_PROGS = rational_precision2double
+# No tiff2rgba tool anymore and therefore not JPEG_DEPENDENT_TESTSCRIPTS
+@HAVE_JPEG_TRUE@@TIFF_TOOLS_TRUE@JPEG_DEPENDENT_TESTSCRIPTS = 
+@BUILD_STATIC_TRUE@STATIC_CHECK_PROGS = rational_precision2double test_write_read_tags test_transferfunction_write_read
 @TIFF_TOOLS_FALSE@TESTSCRIPTS = 
 
 # Test scripts to execute
 @TIFF_TOOLS_TRUE@TESTSCRIPTS = \
-@TIFF_TOOLS_TRUE@	ppm2tiff_pbm.sh \
-@TIFF_TOOLS_TRUE@	ppm2tiff_pgm.sh \
-@TIFF_TOOLS_TRUE@	ppm2tiff_ppm.sh \
-@TIFF_TOOLS_TRUE@	fax2tiff.sh \
 @TIFF_TOOLS_TRUE@	tiffcp-g3.sh \
 @TIFF_TOOLS_TRUE@	tiffcp-g3-1d.sh \
 @TIFF_TOOLS_TRUE@	tiffcp-g3-1d-fill.sh \
@@ -789,74 +729,12 @@ CLEANFILES = test_packbits.tif o-*
 @TIFF_TOOLS_TRUE@	tiffcp-g3-2d-fill.sh \
 @TIFF_TOOLS_TRUE@	tiffcp-g4.sh \
 @TIFF_TOOLS_TRUE@	tiffcp-logluv.sh \
-@TIFF_TOOLS_TRUE@	tiffcp-thumbnail.sh \
 @TIFF_TOOLS_TRUE@	tiffcp-lzw-compat.sh \
 @TIFF_TOOLS_TRUE@	tiffcp-lzw-scanline-decode.sh \
 @TIFF_TOOLS_TRUE@	tiffdump.sh \
 @TIFF_TOOLS_TRUE@	tiffinfo.sh \
 @TIFF_TOOLS_TRUE@	tiffcp-split.sh \
 @TIFF_TOOLS_TRUE@	tiffcp-split-join.sh \
-@TIFF_TOOLS_TRUE@	tiff2ps-PS1.sh \
-@TIFF_TOOLS_TRUE@	tiff2ps-PS2.sh \
-@TIFF_TOOLS_TRUE@	tiff2ps-PS3.sh \
-@TIFF_TOOLS_TRUE@	tiff2ps-EPS1.sh \
-@TIFF_TOOLS_TRUE@	tiff2pdf.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-doubleflip-logluv-3c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-doubleflip-minisblack-1c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-doubleflip-minisblack-1c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-doubleflip-minisblack-2c-8b-alpha.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-doubleflip-miniswhite-1c-1b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-doubleflip-palette-1c-1b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-doubleflip-palette-1c-4b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-doubleflip-palette-1c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-doubleflip-rgb-3c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-doubleflip-rgb-3c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extract-logluv-3c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extract-minisblack-1c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extract-minisblack-1c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extract-minisblack-2c-8b-alpha.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extract-miniswhite-1c-1b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extract-palette-1c-1b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extract-palette-1c-4b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extract-palette-1c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extract-rgb-3c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extract-rgb-3c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extractz14-logluv-3c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extractz14-minisblack-1c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extractz14-minisblack-1c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extractz14-minisblack-2c-8b-alpha.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extractz14-miniswhite-1c-1b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extractz14-palette-1c-1b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extractz14-palette-1c-4b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extractz14-palette-1c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extractz14-rgb-3c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-extractz14-rgb-3c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-R90-logluv-3c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-R90-minisblack-1c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-R90-minisblack-1c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-R90-minisblack-2c-8b-alpha.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-R90-miniswhite-1c-1b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-R90-palette-1c-1b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-R90-palette-1c-4b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-R90-palette-1c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-R90-rgb-3c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiffcrop-R90-rgb-3c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiff2bw-palette-1c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiff2bw-quad-lzw-compat.sh \
-@TIFF_TOOLS_TRUE@	tiff2bw-rgb-3c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiff2rgba-logluv-3c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiff2rgba-minisblack-1c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiff2rgba-minisblack-1c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiff2rgba-minisblack-2c-8b-alpha.sh \
-@TIFF_TOOLS_TRUE@	tiff2rgba-miniswhite-1c-1b.sh \
-@TIFF_TOOLS_TRUE@	tiff2rgba-palette-1c-1b.sh \
-@TIFF_TOOLS_TRUE@	tiff2rgba-palette-1c-4b.sh \
-@TIFF_TOOLS_TRUE@	tiff2rgba-palette-1c-8b.sh \
-@TIFF_TOOLS_TRUE@	tiff2rgba-rgb-3c-16b.sh \
-@TIFF_TOOLS_TRUE@	tiff2rgba-rgb-3c-8b.sh \
-@TIFF_TOOLS_TRUE@	testfax4.sh \
-@TIFF_TOOLS_TRUE@	testfax3_bug_513.sh \
-@TIFF_TOOLS_TRUE@	testdeflatelaststripextradata.sh \
 @TIFF_TOOLS_TRUE@	$(JPEG_DEPENDENT_TESTSCRIPTS)
 
 
@@ -917,6 +795,7 @@ IMAGES_EXTRA_DIST = \
 	images/test_ifd_loop_to_first.tif \
 	images/test_two_ifds.tif \
 	images/test_ifd_loop_subifd.tif \
+	images/webp_lossless_rgba_alpha_fully_opaque.tif \
 	$(PNMIMAGES) \
 	$(TIFFIMAGES)
 
@@ -940,6 +819,12 @@ custom_dir_LDADD = $(LIBTIFF)
 @BUILD_STATIC_TRUE@rational_precision2double_SOURCES = rational_precision2double.c
 @BUILD_STATIC_TRUE@rational_precision2double_LDADD = $(LIBTIFF)
 @BUILD_STATIC_TRUE@rational_precision2double_LDFLAGS = -static
+@BUILD_STATIC_TRUE@test_write_read_tags_SOURCES = test_write_read_tags.c
+@BUILD_STATIC_TRUE@test_write_read_tags_LDADD = $(LIBTIFF)
+@BUILD_STATIC_TRUE@test_write_read_tags_LDFLAGS = -static
+@BUILD_STATIC_TRUE@test_transferfunction_write_read_SOURCES = test_transferfunction_write_read.c
+@BUILD_STATIC_TRUE@test_transferfunction_write_read_LDADD = $(LIBTIFF)
+@BUILD_STATIC_TRUE@test_transferfunction_write_read_LDFLAGS = -static
 custom_dir_EXIF_231_SOURCES = custom_dir_EXIF_231.c
 custom_dir_EXIF_231_LDADD = $(LIBTIFF)
 defer_strile_loading_SOURCES = defer_strile_loading.c
@@ -1063,6 +948,14 @@ test_signed_tags$(EXEEXT): $(test_signed_tags_OBJECTS) $(test_signed_tags_DEPEND
 	@rm -f test_signed_tags$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_signed_tags_OBJECTS) $(test_signed_tags_LDADD) $(LIBS)
 
+test_transferfunction_write_read$(EXEEXT): $(test_transferfunction_write_read_OBJECTS) $(test_transferfunction_write_read_DEPENDENCIES) $(EXTRA_test_transferfunction_write_read_DEPENDENCIES) 
+	@rm -f test_transferfunction_write_read$(EXEEXT)
+	$(AM_V_CCLD)$(test_transferfunction_write_read_LINK) $(test_transferfunction_write_read_OBJECTS) $(test_transferfunction_write_read_LDADD) $(LIBS)
+
+test_write_read_tags$(EXEEXT): $(test_write_read_tags_OBJECTS) $(test_write_read_tags_DEPENDENCIES) $(EXTRA_test_write_read_tags_DEPENDENCIES) 
+	@rm -f test_write_read_tags$(EXEEXT)
+	$(AM_V_CCLD)$(test_write_read_tags_LINK) $(test_write_read_tags_OBJECTS) $(test_write_read_tags_LDADD) $(LIBS)
+
 testtypes$(EXEEXT): $(testtypes_OBJECTS) $(testtypes_DEPENDENCIES) $(EXTRA_testtypes_DEPENDENCIES) 
 	@rm -f testtypes$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(testtypes_OBJECTS) $(testtypes_LDADD) $(LIBS)
@@ -1092,6 +985,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_ifd_loop_detection-test_ifd_loop_detection.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_open_options.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_signed_tags.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_transferfunction_write_read.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_write_read_tags.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testtypes.Po@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
@@ -1453,30 +1348,16 @@ rational_precision2double.log: rational_precision2double$(EXEEXT)
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
-ppm2tiff_pbm.sh.log: ppm2tiff_pbm.sh
-	@p='ppm2tiff_pbm.sh'; \
-	b='ppm2tiff_pbm.sh'; \
+test_write_read_tags.log: test_write_read_tags$(EXEEXT)
+	@p='test_write_read_tags$(EXEEXT)'; \
+	b='test_write_read_tags'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
-ppm2tiff_pgm.sh.log: ppm2tiff_pgm.sh
-	@p='ppm2tiff_pgm.sh'; \
-	b='ppm2tiff_pgm.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-ppm2tiff_ppm.sh.log: ppm2tiff_ppm.sh
-	@p='ppm2tiff_ppm.sh'; \
-	b='ppm2tiff_ppm.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-fax2tiff.sh.log: fax2tiff.sh
-	@p='fax2tiff.sh'; \
-	b='fax2tiff.sh'; \
+test_transferfunction_write_read.log: test_transferfunction_write_read$(EXEEXT)
+	@p='test_transferfunction_write_read$(EXEEXT)'; \
+	b='test_transferfunction_write_read'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -1530,13 +1411,6 @@ tiffcp-logluv.sh.log: tiffcp-logluv.sh
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcp-thumbnail.sh.log: tiffcp-thumbnail.sh
-	@p='tiffcp-thumbnail.sh'; \
-	b='tiffcp-thumbnail.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
 tiffcp-lzw-compat.sh.log: tiffcp-lzw-compat.sh
 	@p='tiffcp-lzw-compat.sh'; \
 	b='tiffcp-lzw-compat.sh'; \
@@ -1575,461 +1449,6 @@ tiffcp-split.sh.log: tiffcp-split.sh
 tiffcp-split-join.sh.log: tiffcp-split-join.sh
 	@p='tiffcp-split-join.sh'; \
 	b='tiffcp-split-join.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiff2ps-PS1.sh.log: tiff2ps-PS1.sh
-	@p='tiff2ps-PS1.sh'; \
-	b='tiff2ps-PS1.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiff2ps-PS2.sh.log: tiff2ps-PS2.sh
-	@p='tiff2ps-PS2.sh'; \
-	b='tiff2ps-PS2.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiff2ps-PS3.sh.log: tiff2ps-PS3.sh
-	@p='tiff2ps-PS3.sh'; \
-	b='tiff2ps-PS3.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiff2ps-EPS1.sh.log: tiff2ps-EPS1.sh
-	@p='tiff2ps-EPS1.sh'; \
-	b='tiff2ps-EPS1.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiff2pdf.sh.log: tiff2pdf.sh
-	@p='tiff2pdf.sh'; \
-	b='tiff2pdf.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-doubleflip-logluv-3c-16b.sh.log: tiffcrop-doubleflip-logluv-3c-16b.sh
-	@p='tiffcrop-doubleflip-logluv-3c-16b.sh'; \
-	b='tiffcrop-doubleflip-logluv-3c-16b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-doubleflip-minisblack-1c-16b.sh.log: tiffcrop-doubleflip-minisblack-1c-16b.sh
-	@p='tiffcrop-doubleflip-minisblack-1c-16b.sh'; \
-	b='tiffcrop-doubleflip-minisblack-1c-16b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-doubleflip-minisblack-1c-8b.sh.log: tiffcrop-doubleflip-minisblack-1c-8b.sh
-	@p='tiffcrop-doubleflip-minisblack-1c-8b.sh'; \
-	b='tiffcrop-doubleflip-minisblack-1c-8b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-doubleflip-minisblack-2c-8b-alpha.sh.log: tiffcrop-doubleflip-minisblack-2c-8b-alpha.sh
-	@p='tiffcrop-doubleflip-minisblack-2c-8b-alpha.sh'; \
-	b='tiffcrop-doubleflip-minisblack-2c-8b-alpha.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-doubleflip-miniswhite-1c-1b.sh.log: tiffcrop-doubleflip-miniswhite-1c-1b.sh
-	@p='tiffcrop-doubleflip-miniswhite-1c-1b.sh'; \
-	b='tiffcrop-doubleflip-miniswhite-1c-1b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-doubleflip-palette-1c-1b.sh.log: tiffcrop-doubleflip-palette-1c-1b.sh
-	@p='tiffcrop-doubleflip-palette-1c-1b.sh'; \
-	b='tiffcrop-doubleflip-palette-1c-1b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-doubleflip-palette-1c-4b.sh.log: tiffcrop-doubleflip-palette-1c-4b.sh
-	@p='tiffcrop-doubleflip-palette-1c-4b.sh'; \
-	b='tiffcrop-doubleflip-palette-1c-4b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-doubleflip-palette-1c-8b.sh.log: tiffcrop-doubleflip-palette-1c-8b.sh
-	@p='tiffcrop-doubleflip-palette-1c-8b.sh'; \
-	b='tiffcrop-doubleflip-palette-1c-8b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-doubleflip-rgb-3c-16b.sh.log: tiffcrop-doubleflip-rgb-3c-16b.sh
-	@p='tiffcrop-doubleflip-rgb-3c-16b.sh'; \
-	b='tiffcrop-doubleflip-rgb-3c-16b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-doubleflip-rgb-3c-8b.sh.log: tiffcrop-doubleflip-rgb-3c-8b.sh
-	@p='tiffcrop-doubleflip-rgb-3c-8b.sh'; \
-	b='tiffcrop-doubleflip-rgb-3c-8b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-extract-logluv-3c-16b.sh.log: tiffcrop-extract-logluv-3c-16b.sh
-	@p='tiffcrop-extract-logluv-3c-16b.sh'; \
-	b='tiffcrop-extract-logluv-3c-16b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-extract-minisblack-1c-16b.sh.log: tiffcrop-extract-minisblack-1c-16b.sh
-	@p='tiffcrop-extract-minisblack-1c-16b.sh'; \
-	b='tiffcrop-extract-minisblack-1c-16b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-extract-minisblack-1c-8b.sh.log: tiffcrop-extract-minisblack-1c-8b.sh
-	@p='tiffcrop-extract-minisblack-1c-8b.sh'; \
-	b='tiffcrop-extract-minisblack-1c-8b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-extract-minisblack-2c-8b-alpha.sh.log: tiffcrop-extract-minisblack-2c-8b-alpha.sh
-	@p='tiffcrop-extract-minisblack-2c-8b-alpha.sh'; \
-	b='tiffcrop-extract-minisblack-2c-8b-alpha.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-extract-miniswhite-1c-1b.sh.log: tiffcrop-extract-miniswhite-1c-1b.sh
-	@p='tiffcrop-extract-miniswhite-1c-1b.sh'; \
-	b='tiffcrop-extract-miniswhite-1c-1b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-extract-palette-1c-1b.sh.log: tiffcrop-extract-palette-1c-1b.sh
-	@p='tiffcrop-extract-palette-1c-1b.sh'; \
-	b='tiffcrop-extract-palette-1c-1b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-extract-palette-1c-4b.sh.log: tiffcrop-extract-palette-1c-4b.sh
-	@p='tiffcrop-extract-palette-1c-4b.sh'; \
-	b='tiffcrop-extract-palette-1c-4b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-extract-palette-1c-8b.sh.log: tiffcrop-extract-palette-1c-8b.sh
-	@p='tiffcrop-extract-palette-1c-8b.sh'; \
-	b='tiffcrop-extract-palette-1c-8b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-extract-rgb-3c-16b.sh.log: tiffcrop-extract-rgb-3c-16b.sh
-	@p='tiffcrop-extract-rgb-3c-16b.sh'; \
-	b='tiffcrop-extract-rgb-3c-16b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-extract-rgb-3c-8b.sh.log: tiffcrop-extract-rgb-3c-8b.sh
-	@p='tiffcrop-extract-rgb-3c-8b.sh'; \
-	b='tiffcrop-extract-rgb-3c-8b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-extractz14-logluv-3c-16b.sh.log: tiffcrop-extractz14-logluv-3c-16b.sh
-	@p='tiffcrop-extractz14-logluv-3c-16b.sh'; \
-	b='tiffcrop-extractz14-logluv-3c-16b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-extractz14-minisblack-1c-16b.sh.log: tiffcrop-extractz14-minisblack-1c-16b.sh
-	@p='tiffcrop-extractz14-minisblack-1c-16b.sh'; \
-	b='tiffcrop-extractz14-minisblack-1c-16b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-extractz14-minisblack-1c-8b.sh.log: tiffcrop-extractz14-minisblack-1c-8b.sh
-	@p='tiffcrop-extractz14-minisblack-1c-8b.sh'; \
-	b='tiffcrop-extractz14-minisblack-1c-8b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-extractz14-minisblack-2c-8b-alpha.sh.log: tiffcrop-extractz14-minisblack-2c-8b-alpha.sh
-	@p='tiffcrop-extractz14-minisblack-2c-8b-alpha.sh'; \
-	b='tiffcrop-extractz14-minisblack-2c-8b-alpha.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-extractz14-miniswhite-1c-1b.sh.log: tiffcrop-extractz14-miniswhite-1c-1b.sh
-	@p='tiffcrop-extractz14-miniswhite-1c-1b.sh'; \
-	b='tiffcrop-extractz14-miniswhite-1c-1b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-extractz14-palette-1c-1b.sh.log: tiffcrop-extractz14-palette-1c-1b.sh
-	@p='tiffcrop-extractz14-palette-1c-1b.sh'; \
-	b='tiffcrop-extractz14-palette-1c-1b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-extractz14-palette-1c-4b.sh.log: tiffcrop-extractz14-palette-1c-4b.sh
-	@p='tiffcrop-extractz14-palette-1c-4b.sh'; \
-	b='tiffcrop-extractz14-palette-1c-4b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-extractz14-palette-1c-8b.sh.log: tiffcrop-extractz14-palette-1c-8b.sh
-	@p='tiffcrop-extractz14-palette-1c-8b.sh'; \
-	b='tiffcrop-extractz14-palette-1c-8b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-extractz14-rgb-3c-16b.sh.log: tiffcrop-extractz14-rgb-3c-16b.sh
-	@p='tiffcrop-extractz14-rgb-3c-16b.sh'; \
-	b='tiffcrop-extractz14-rgb-3c-16b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-extractz14-rgb-3c-8b.sh.log: tiffcrop-extractz14-rgb-3c-8b.sh
-	@p='tiffcrop-extractz14-rgb-3c-8b.sh'; \
-	b='tiffcrop-extractz14-rgb-3c-8b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-R90-logluv-3c-16b.sh.log: tiffcrop-R90-logluv-3c-16b.sh
-	@p='tiffcrop-R90-logluv-3c-16b.sh'; \
-	b='tiffcrop-R90-logluv-3c-16b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-R90-minisblack-1c-16b.sh.log: tiffcrop-R90-minisblack-1c-16b.sh
-	@p='tiffcrop-R90-minisblack-1c-16b.sh'; \
-	b='tiffcrop-R90-minisblack-1c-16b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-R90-minisblack-1c-8b.sh.log: tiffcrop-R90-minisblack-1c-8b.sh
-	@p='tiffcrop-R90-minisblack-1c-8b.sh'; \
-	b='tiffcrop-R90-minisblack-1c-8b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-R90-minisblack-2c-8b-alpha.sh.log: tiffcrop-R90-minisblack-2c-8b-alpha.sh
-	@p='tiffcrop-R90-minisblack-2c-8b-alpha.sh'; \
-	b='tiffcrop-R90-minisblack-2c-8b-alpha.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-R90-miniswhite-1c-1b.sh.log: tiffcrop-R90-miniswhite-1c-1b.sh
-	@p='tiffcrop-R90-miniswhite-1c-1b.sh'; \
-	b='tiffcrop-R90-miniswhite-1c-1b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-R90-palette-1c-1b.sh.log: tiffcrop-R90-palette-1c-1b.sh
-	@p='tiffcrop-R90-palette-1c-1b.sh'; \
-	b='tiffcrop-R90-palette-1c-1b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-R90-palette-1c-4b.sh.log: tiffcrop-R90-palette-1c-4b.sh
-	@p='tiffcrop-R90-palette-1c-4b.sh'; \
-	b='tiffcrop-R90-palette-1c-4b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-R90-palette-1c-8b.sh.log: tiffcrop-R90-palette-1c-8b.sh
-	@p='tiffcrop-R90-palette-1c-8b.sh'; \
-	b='tiffcrop-R90-palette-1c-8b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-R90-rgb-3c-16b.sh.log: tiffcrop-R90-rgb-3c-16b.sh
-	@p='tiffcrop-R90-rgb-3c-16b.sh'; \
-	b='tiffcrop-R90-rgb-3c-16b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiffcrop-R90-rgb-3c-8b.sh.log: tiffcrop-R90-rgb-3c-8b.sh
-	@p='tiffcrop-R90-rgb-3c-8b.sh'; \
-	b='tiffcrop-R90-rgb-3c-8b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiff2bw-palette-1c-8b.sh.log: tiff2bw-palette-1c-8b.sh
-	@p='tiff2bw-palette-1c-8b.sh'; \
-	b='tiff2bw-palette-1c-8b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiff2bw-quad-lzw-compat.sh.log: tiff2bw-quad-lzw-compat.sh
-	@p='tiff2bw-quad-lzw-compat.sh'; \
-	b='tiff2bw-quad-lzw-compat.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiff2bw-rgb-3c-8b.sh.log: tiff2bw-rgb-3c-8b.sh
-	@p='tiff2bw-rgb-3c-8b.sh'; \
-	b='tiff2bw-rgb-3c-8b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiff2rgba-logluv-3c-16b.sh.log: tiff2rgba-logluv-3c-16b.sh
-	@p='tiff2rgba-logluv-3c-16b.sh'; \
-	b='tiff2rgba-logluv-3c-16b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiff2rgba-minisblack-1c-16b.sh.log: tiff2rgba-minisblack-1c-16b.sh
-	@p='tiff2rgba-minisblack-1c-16b.sh'; \
-	b='tiff2rgba-minisblack-1c-16b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiff2rgba-minisblack-1c-8b.sh.log: tiff2rgba-minisblack-1c-8b.sh
-	@p='tiff2rgba-minisblack-1c-8b.sh'; \
-	b='tiff2rgba-minisblack-1c-8b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiff2rgba-minisblack-2c-8b-alpha.sh.log: tiff2rgba-minisblack-2c-8b-alpha.sh
-	@p='tiff2rgba-minisblack-2c-8b-alpha.sh'; \
-	b='tiff2rgba-minisblack-2c-8b-alpha.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiff2rgba-miniswhite-1c-1b.sh.log: tiff2rgba-miniswhite-1c-1b.sh
-	@p='tiff2rgba-miniswhite-1c-1b.sh'; \
-	b='tiff2rgba-miniswhite-1c-1b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiff2rgba-palette-1c-1b.sh.log: tiff2rgba-palette-1c-1b.sh
-	@p='tiff2rgba-palette-1c-1b.sh'; \
-	b='tiff2rgba-palette-1c-1b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiff2rgba-palette-1c-4b.sh.log: tiff2rgba-palette-1c-4b.sh
-	@p='tiff2rgba-palette-1c-4b.sh'; \
-	b='tiff2rgba-palette-1c-4b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiff2rgba-palette-1c-8b.sh.log: tiff2rgba-palette-1c-8b.sh
-	@p='tiff2rgba-palette-1c-8b.sh'; \
-	b='tiff2rgba-palette-1c-8b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiff2rgba-rgb-3c-16b.sh.log: tiff2rgba-rgb-3c-16b.sh
-	@p='tiff2rgba-rgb-3c-16b.sh'; \
-	b='tiff2rgba-rgb-3c-16b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiff2rgba-rgb-3c-8b.sh.log: tiff2rgba-rgb-3c-8b.sh
-	@p='tiff2rgba-rgb-3c-8b.sh'; \
-	b='tiff2rgba-rgb-3c-8b.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-testfax4.sh.log: testfax4.sh
-	@p='testfax4.sh'; \
-	b='testfax4.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-testfax3_bug_513.sh.log: testfax3_bug_513.sh
-	@p='testfax3_bug_513.sh'; \
-	b='testfax3_bug_513.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-testdeflatelaststripextradata.sh.log: testdeflatelaststripextradata.sh
-	@p='testdeflatelaststripextradata.sh'; \
-	b='testdeflatelaststripextradata.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiff2rgba-quad-tile.jpg.sh.log: tiff2rgba-quad-tile.jpg.sh
-	@p='tiff2rgba-quad-tile.jpg.sh'; \
-	b='tiff2rgba-quad-tile.jpg.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiff2rgba-ojpeg_zackthecat_subsamp22_single_strip.sh.log: tiff2rgba-ojpeg_zackthecat_subsamp22_single_strip.sh
-	@p='tiff2rgba-ojpeg_zackthecat_subsamp22_single_strip.sh'; \
-	b='tiff2rgba-ojpeg_zackthecat_subsamp22_single_strip.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiff2rgba-ojpeg_chewey_subsamp21_multi_strip.sh.log: tiff2rgba-ojpeg_chewey_subsamp21_multi_strip.sh
-	@p='tiff2rgba-ojpeg_chewey_subsamp21_multi_strip.sh'; \
-	b='tiff2rgba-ojpeg_chewey_subsamp21_multi_strip.sh'; \
-	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
-	--log-file $$b.log --trs-file $$b.trs \
-	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
-	"$$tst" $(AM_TESTS_FD_REDIRECT)
-tiff2rgba-ojpeg_single_strip_no_rowsperstrip.sh.log: tiff2rgba-ojpeg_single_strip_no_rowsperstrip.sh
-	@p='tiff2rgba-ojpeg_single_strip_no_rowsperstrip.sh'; \
-	b='tiff2rgba-ojpeg_single_strip_no_rowsperstrip.sh'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -2147,6 +1566,8 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/test_ifd_loop_detection-test_ifd_loop_detection.Po
 	-rm -f ./$(DEPDIR)/test_open_options.Po
 	-rm -f ./$(DEPDIR)/test_signed_tags.Po
+	-rm -f ./$(DEPDIR)/test_transferfunction_write_read.Po
+	-rm -f ./$(DEPDIR)/test_write_read_tags.Po
 	-rm -f ./$(DEPDIR)/testtypes.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
@@ -2212,6 +1633,8 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/test_ifd_loop_detection-test_ifd_loop_detection.Po
 	-rm -f ./$(DEPDIR)/test_open_options.Po
 	-rm -f ./$(DEPDIR)/test_signed_tags.Po
+	-rm -f ./$(DEPDIR)/test_transferfunction_write_read.Po
+	-rm -f ./$(DEPDIR)/test_write_read_tags.Po
 	-rm -f ./$(DEPDIR)/testtypes.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
@@ -2270,126 +1693,6 @@ memcheck:
 # ptrcheck: valgrind's experimental pointer checking tool.
 ptrcheck:
 	$(MAKE) MEMCHECK='valgrind --tool=exp-ptrcheck --quiet $(VALGRIND_EXTRA_OPTS)' check
-
-# tiff2bw is pretty lame so currently only the generated scripts
-# tiff2bw-palette-1c-8b.sh, tiff2bw-quad-lzw-compat.sh, and
-# tiff2bw-rgb-3c-8b.sh pass tests.
-generate-tiff2bw-tests:
-	for file in $(TIFFIMAGES) ; \
-	do \
-	base=`basename $$file .tiff` ; \
-	testscript=$(srcdir)/tiff2bw-$$base.sh ; \
-	( \
-	  echo "#!/bin/sh" ; \
-	  echo "# Generated file, master is Makefile.am" ; \
-	  echo ". \$${srcdir:-.}/common.sh" ; \
-	  echo "infile=\"\$$srcdir/$$file\"" ; \
-	  echo "outfile=\"o-tiff2bw-$$base.tiff\"" ; \
-	  echo "f_test_convert \"\$$TIFF2BW\" \$$infile \$$outfile" ; \
-	  echo "f_tiffinfo_validate \$$outfile" ; \
-	) > $$testscript ; \
-	chmod +x $$testscript ; \
-	done
-
-generate-tiff2rgba-tests:
-	for file in $(TIFFIMAGES) ; \
-	do \
-	base=`basename $$file .tiff` ; \
-	testscript=$(srcdir)/tiff2rgba-$$base.sh ; \
-	( \
-	  echo "#!/bin/sh" ; \
-	  echo "# Generated file, master is Makefile.am" ; \
-	  echo ". \$${srcdir:-.}/common.sh" ; \
-	  echo "infile=\"\$$srcdir/$$file\"" ; \
-	  echo "outfile=\"o-tiff2rgba-$$base.tiff\"" ; \
-	  echo "f_test_convert \"\$$TIFF2RGBA\" \$$infile \$$outfile" ; \
-	  echo "f_tiffinfo_validate \$$outfile" ; \
-	) > $$testscript ; \
-	chmod +x $$testscript ; \
-	done
-
-# Test rotations
-generate-tiffcrop-R90-tests:
-	for file in $(TIFFIMAGES) ; \
-	do \
-	base=`basename $$file .tiff` ; \
-	testscript=$(srcdir)/tiffcrop-R90-$$base.sh ; \
-	( \
-	  echo "#!/bin/sh" ; \
-	  echo "# Generated file, master is Makefile.am" ; \
-	  echo ". \$${srcdir:-.}/common.sh" ; \
-	  echo "infile=\"\$$srcdir/$$file\"" ; \
-	  echo "outfile=\"o-tiffcrop-R90-$$base.tiff\"" ; \
-	  echo "f_test_convert \"\$$TIFFCROP -R90\" \$$infile \$$outfile" ; \
-	  echo "f_tiffinfo_validate \$$outfile" ; \
-	) > $$testscript ; \
-	chmod +x $$testscript ; \
-	done
-
-# Test flip (mirror)
-generate-tiffcrop-doubleflip-tests:
-	for file in $(TIFFIMAGES) ; \
-	do \
-	base=`basename $$file .tiff` ; \
-	testscript=$(srcdir)/tiffcrop-doubleflip-$$base.sh ; \
-	( \
-	  echo "#!/bin/sh" ; \
-	  echo "# Generated file, master is Makefile.am" ; \
-	  echo ". \$${srcdir:-.}/common.sh" ; \
-	  echo "infile=\"\$$srcdir/$$file\"" ; \
-	  echo "outfile=\"o-tiffcrop-doubleflip-$$base.tiff\"" ; \
-	  echo "f_test_convert \"\$$TIFFCROP -F both\" \$$infile \$$outfile" ; \
-	  echo "f_tiffinfo_validate \$$outfile" ; \
-	) > $$testscript ; \
-	chmod +x $$testscript ; \
-	done
-
-# Test extracting a section 100 pixels wide and 100 pixels high
-generate-tiffcrop-extract-tests:
-	for file in $(TIFFIMAGES) ; \
-	do \
-	base=`basename $$file .tiff` ; \
-	testscript=$(srcdir)/tiffcrop-extract-$$base.sh ; \
-	( \
-	  echo "#!/bin/sh" ; \
-	  echo "# Generated file, master is Makefile.am" ; \
-	  echo ". \$${srcdir:-.}/common.sh" ; \
-	  echo "infile=\"\$$srcdir/$$file\"" ; \
-	  echo "outfile=\"o-tiffcrop-extract-$$base.tiff\"" ; \
-	  echo "f_test_convert \"\$$TIFFCROP -U px -E top -X 60 -Y 60\" \$$infile \$$outfile" ; \
-	  echo "f_tiffinfo_validate \$$outfile" ; \
-	) > $$testscript ; \
-	chmod +x $$testscript ; \
-	done
-
-# Test extracting the first and fourth quarters from the left side.
-generate-tiffcrop-extractz14-tests:
-	for file in $(TIFFIMAGES) ; \
-	do \
-	base=`basename $$file .tiff` ; \
-	testscript=$(srcdir)/tiffcrop-extractz14-$$base.sh ; \
-	( \
-	  echo "#!/bin/sh" ; \
-	  echo "# Generated file, master is Makefile.am" ; \
-	  echo ". \$${srcdir:-.}/common.sh" ; \
-	  echo "infile=\"\$$srcdir/$$file\"" ; \
-	  echo "outfile=\"o-tiffcrop-extractz14-$$base.tiff\"" ; \
-	  echo "f_test_convert \"\$$TIFFCROP -E left -Z1:4,2:4\" \$$infile \$$outfile" ; \
-	  echo "f_tiffinfo_validate \$$outfile" ; \
-	) > $$testscript ; \
-	chmod +x $$testscript ; \
-	done
-
-generate-tiffcrop-tests: \
-	generate-tiffcrop-R90-tests \
-	generate-tiffcrop-doubleflip-tests \
-	generate-tiffcrop-extract-tests \
-	generate-tiffcrop-extractz14-tests
-
-generate-tests: \
-	generate-tiff2bw-tests \
-	generate-tiff2rgba-tests \
-	generate-tiffcrop-tests
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

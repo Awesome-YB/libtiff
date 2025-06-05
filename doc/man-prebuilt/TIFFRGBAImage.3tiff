@@ -27,7 +27,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "TIFFRGBAIMAGE" "3tiff" "Jun 10, 2023" "4.5" "LibTIFF"
+.TH "TIFFRGBAIMAGE" "3tiff" "Sep 08, 2023" "4.6" "LibTIFF"
 .SH NAME
 TIFFRGBAImage \- read and decode an image into a raster
 .SH SYNOPSIS
@@ -151,8 +151,8 @@ by overriding the put methods as described above for supporting
 alternate raster formats.
 Simply keep a reference to the default put methods setup by
 \fI\%TIFFRGBAImageBegin()\fP and then invoke them before or after
-each display operation. For example, the
-\fI\%tiffgt\fP utility uses the following put method to
+each display operation.
+An example for a “put” method to
 update the display as the raster is being filled:
 .INDENT 0.0
 .INDENT 3.5

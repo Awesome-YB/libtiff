@@ -214,12 +214,6 @@ ECHO_T = @ECHO_T@
 EGREP = @EGREP@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
-GLUT_CFLAGS = @GLUT_CFLAGS@
-GLUT_LIBS = @GLUT_LIBS@
-GLU_CFLAGS = @GLU_CFLAGS@
-GLU_LIBS = @GLU_LIBS@
-GL_CFLAGS = @GL_CFLAGS@
-GL_LIBS = @GL_LIBS@
 GREP = @GREP@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
@@ -262,9 +256,6 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
-PTHREAD_CC = @PTHREAD_CC@
-PTHREAD_CFLAGS = @PTHREAD_CFLAGS@
-PTHREAD_LIBS = @PTHREAD_LIBS@
 PYTHON_BIN = @PYTHON_BIN@
 RANLIB = @RANLIB@
 SED = @SED@
@@ -277,11 +268,6 @@ TIFF_MAN1_PREBUILT = @TIFF_MAN1_PREBUILT@
 TIFF_MAN3_GEN = @TIFF_MAN3_GEN@
 TIFF_MAN3_PREBUILT = @TIFF_MAN3_PREBUILT@
 VERSION = @VERSION@
-XMKMF = @XMKMF@
-X_CFLAGS = @X_CFLAGS@
-X_EXTRA_LIBS = @X_EXTRA_LIBS@
-X_LIBS = @X_LIBS@
-X_PRE_LIBS = @X_PRE_LIBS@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
@@ -295,7 +281,6 @@ am__leading_dot = @am__leading_dot@
 am__quote = @am__quote@
 am__tar = @am__tar@
 am__untar = @am__untar@
-ax_pthread_config = @ax_pthread_config@
 bindir = @bindir@
 build = @build@
 build_alias = @build_alias@
@@ -349,26 +334,10 @@ rst_sources = \
 	index.rst \
 	build.rst \
 	internals.rst \
-	tools/tiffgt.rst \
-	tools/tiffdither.rst \
-	tools/tiff2pdf.rst \
-	tools/tiff2ps.rst \
-	tools/ppm2tiff.rst \
-	tools/raw2tiff.rst \
-	tools/fax2tiff.rst \
-	tools/tiffcrop.rst \
-	tools/tiff2bw.rst \
-	tools/fax2ps.rst \
-	tools/thumbnail.rst \
-	tools/tiffcmp.rst \
 	tools/tiffdump.rst \
-	tools/tiff2rgba.rst \
 	tools/tiffinfo.rst \
-	tools/rgb2ycbcr.rst \
 	tools/tiffset.rst \
 	tools/tiffsplit.rst \
-	tools/tiffmedian.rst \
-	tools/pal2rgb.rst \
 	tools/tiffcp.rst \
 	project/license.rst \
 	project/index.rst \
@@ -440,6 +409,7 @@ rst_sources = \
 	releases/v3.7.2.rst \
 	releases/v4.5.0.rst \
 	releases/v4.5.1.rst \
+	releases/v4.6.0.rst \
 	functions.rst \
 	tools.rst \
 	terms.rst \
@@ -504,6 +474,7 @@ rst_sources = \
 	functions/TIFFSetTagExtender.rst \
 	functions/TIFFStrileQuery.rst \
 	libtiff.rst \
+	multi_page.rst \
 	images.rst
 
 EXTRA_DIST = \
@@ -717,8 +688,8 @@ maintainer-clean-generic:
 	@echo "it deletes files that may require special tools to rebuild."
 @SPHINX_FALSE@clean-local:
 @TIFF_DOCS_FALSE@clean-local:
-@TIFF_DOCS_FALSE@install-data-local:
 @TIFF_DOCS_FALSE@uninstall-local:
+@TIFF_DOCS_FALSE@install-data-local:
 clean: clean-am
 
 clean-am: clean-generic clean-libtool clean-local mostlyclean-am

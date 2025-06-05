@@ -27,7 +27,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "TIFFBUFFER" "3tiff" "Jun 10, 2023" "4.5" "LibTIFF"
+.TH "TIFFBUFFER" "3tiff" "Sep 08, 2023" "4.6" "LibTIFF"
 .SH NAME
 TIFFbuffer \- I/O buffering control routines
 .SH SYNOPSIS

@@ -27,7 +27,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "TIFFFIELDREADCOUNT" "3tiff" "Jun 10, 2023" "4.5" "LibTIFF"
+.TH "TIFFFIELDREADCOUNT" "3tiff" "Sep 08, 2023" "4.6" "LibTIFF"
 .SH NAME
 TIFFFieldReadCount \- get number of values to be read from field
 .SH SYNOPSIS
@@ -72,6 +72,12 @@ equal to the image’s number of samples per pixel.
 \fI\%TIFFFieldReadCount()\fP returns an integer.
 .SH SEE ALSO
 .sp
+\fI\%TIFFFieldDataType\fP (3tiff),
+\fI\%TIFFFieldName\fP (3tiff),
+\fI\%TIFFFieldPassCount\fP (3tiff),
+\fI\%TIFFFieldQuery\fP (3tiff),
+\fI\%TIFFFieldTag\fP (3tiff),
+\fI\%TIFFFieldWriteCount\fP (3tiff),
 \fI\%libtiff\fP (3tiff)
 .SH AUTHOR
 LibTIFF contributors
